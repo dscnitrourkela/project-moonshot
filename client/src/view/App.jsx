@@ -21,20 +21,20 @@ function App() {
   };
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('slack')
-      .doc('info')
-      .onSnapshot((snapshot) => {
-        setSlackCounter(snapshot.data().count);
-        setNewMember({
-          name: snapshot.data().newMember.name,
-        });
-        setModalOpen(true);
-        setTimeout(function () {
-          setModalOpen(false);
-        }, 3000);
-      });
+    // firebase
+    //   .firestore()
+    //   .collection('slack')
+    //   .doc('info')
+    //   .onSnapshot((snapshot) => {
+    //     setSlackCounter(snapshot.data().count);
+    //     setNewMember({
+    //       name: snapshot.data().newMember.name,
+    //     });
+    //     setModalOpen(true);
+    //     setTimeout(function () {
+    //       setModalOpen(false);
+    //     }, 3000);
+    //   });
   }, []);
 
   function useClientRect() {
