@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
 
 *,
 *::after,
@@ -15,7 +15,7 @@ body {
 	font-size: 16px;
 	line-height: 1.7;
 	box-sizing: border-box;
-	background-color: #000;
+	background-color: #072540;
 }
 
 li,

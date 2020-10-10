@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Sketch from 'react-p5'
 import drawing from '../helpers/coordinates'
 import Complex, {dft} from '../helpers/complex'
 
 function P5({width, height}) {
   let x = [];
-  let fourierX;
+  let fourierX = [];
   let time = 0;
   let path = []; 
   let skip = 6;
+
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(width, height).parent(canvasParentRef)
     for (let i = 0; i < drawing.length; i += skip) {
@@ -37,7 +38,7 @@ function P5({width, height}) {
       }
       return p5.createVector(x, y);
     }
-      p5.background(7,37,64);
+      p5.background(24,61,93);
       let v = epicycles(p5.width/2, p5.height/2 , 0, fourierX);
       path.unshift(v);
 

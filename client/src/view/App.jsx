@@ -6,36 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '../components/Modal';
 import firebase from '../config/firebase';
 import P5 from '../components/P5'
+import Bottom from '../components/Bottom'
 
 function App() {
   const classes = useStyles();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [slackCounter, setSlackCounter] = useState(0);
-  const [newMember, setNewMember] = useState({
-    name: '',
-  });
   const [rect, ref] = useClientRect();
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
-
-  useEffect(() => {
-    // firebase
-    //   .firestore()
-    //   .collection('slack')
-    //   .doc('info')
-    //   .onSnapshot((snapshot) => {
-    //     setSlackCounter(snapshot.data().count);
-    //     setNewMember({
-    //       name: snapshot.data().newMember.name,
-    //     });
-    //     setModalOpen(true);
-    //     setTimeout(function () {
-    //       setModalOpen(false);
-    //     }, 3000);
-    //   });
-  }, []);
 
   function useClientRect() {
     const [rect, setRect] = React.useState(null);
@@ -51,7 +26,7 @@ function App() {
     <>
       <AppBar className={classes.appbar}>
         <Toolbar>
-          <Typography variant='h3'>DSC NIT Rourkela</Typography>
+          <Typography variant='h3' className={classes.typography}>DSC NIT Rourkela</Typography>
         </Toolbar>
       </AppBar>
 
@@ -75,30 +50,11 @@ function App() {
 
           <Grid item sm={12} md={12} lg={12} style={{height: '25%', marginBottom: 0}}>
             <Paper elevation={2} className={classes.box1}>
-              <h1>{slackCounter}</h1>
-              <button
-                onClick={() => {
-                  setModalOpen(true);
-                  setTimeout(function () {
-                    setModalOpen(false);
-                  }, 5000);
-                }}
-                style={{ marginLeft: 20 }}
-              >
-                open
-              </button>
+              <Bottom />
             </Paper>
           </Grid>
         </Grid>
       </Container>
-
-      {newMember.name !== '' && (
-        <Modal
-          open={modalOpen}
-          handleClose={handleClose}
-          newMember={newMember}
-        />
-      )}
     </>
   );
 }
@@ -109,14 +65,19 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: 10,
     height: window.innerHeight - 80,
-    backgroundColor: ''
+    backgroundColor: '#072540',
   },
   appbar: {
     height: 80,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    backgroundColor: 'rgba(156, 70, 104, 0.3)'
+    backgroundColor: '#93c2db',
+  },
+  typography: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2em',
+    color: '#072540'
   },
   toolbar: {
     ...theme.mixins.toolbar, 
@@ -127,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#072540',
+    backgroundColor: '#183d5d',
 
   },
   box2: {
@@ -135,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#072540',
+    backgroundColor: '#183d5d',
     overflow: 'hidden'
   },
   box3: {
@@ -143,6 +104,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#072540',
+    backgroundColor: '#183d5d',
   },
 }));
