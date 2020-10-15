@@ -1,43 +1,58 @@
 import React, {useState, useEffect} from 'react'
+
 import firebase from '../config/firebase'
-import Modal from './Modal'
-import Counter from './Counter'
+
+import AwesomeSlider from 'react-awesome-slider';
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
+import 'react-awesome-slider/dist/styles.css';
+
+const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 function Bottom() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [newMember, setNewMember] = useState({name: ''});
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
+  const [contributors, setContributors] = useState([])
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('slack')
-      .doc('info')
-      .onSnapshot((snapshot) => {
-        setNewMember({
-          name: snapshot.data().newMember.name,
-        });
-        setModalOpen(true);
-        setTimeout(function () {
-          setModalOpen(false);
-        }, 3000);
-      });
-  }, []);
+    firebase.firestore().collection('contributors').onSnapshot(query => {
+      const members = []
+      query.forEach(contributor => {
+        members.push({name: contributor.id, photoURL: contributor.data().avatar_url, repos: contributor.data().contribution})
+      })
+      setContributors(members)
+    })
+  })
+
+  const renderContributor = (contributor) => (
+    <div style={{display: 'flex', alignItems: 'center', width: 800, height: window.innerHeight * 0.25 -20, justifyContent: 'space-around' }}>
+      <img style={{width: window.innerHeight * 0.25 - 50, height: window.innerHeight * 0.25 - 50}} src={contributor.photoURL} />
+      <div style={{width: '70%', height: '80%'}}>
+        <h1 style={{color: '#9c4668', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '2em', textAlign: 'center', paddingBottom: 5, borderBottom: '1px solid #9c4668'}}>{contributor.name}</h1>
+        <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '90%', marginTop: 10}}>
+        {contributor.repos.map(repo => (
+          <div>
+            <h3 style={{color: '#93c2db', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '1.6em'}}>{repo.split('/')[0]}</h3>
+            <h4 style={{color: '#9c4668', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '1.2em'}}>{repo.split('/')[1]}</h4>
+          </div>
+        ))}
+        </div>
+      </div>
+    </div>
+  )
 
   return (
-    <div style={{color: '#fff'}}>
-      <Counter />
-      {newMember.name !== '' && (
-        <Modal
-          open={modalOpen}
-          handleClose={handleClose}
-          newMember={newMember}
-        />
-      )}
-    </div>
+    <AutoplaySlider
+      play={true}
+      cancelOnInteraction={false} // should stop playing on user interaction
+      interval={2000}
+      organicArrows={false}
+      style={{height: '100%', borderRadius: 10}}
+      bullets={false}
+    >
+      {contributors.length > 0 ? contributors.map(contributor => (
+        <div style={{width: '100%', backgroundColor: '#183d5d',}}>
+          {renderContributor(contributor)}
+        </div>
+      )) : null} 
+    </AutoplaySlider>
   )
 }
 

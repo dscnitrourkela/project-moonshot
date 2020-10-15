@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Grid, AppBar, Paper, Toolbar, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Modal from '../components/Modal';
-import firebase from '../config/firebase';
 import P5 from '../components/P5'
+import Repos from '../components/Repos'
 import Bottom from '../components/Bottom'
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
 
           <Grid item sm={12} md={4} lg={4} style={{height: '75%', marginBottom: 0}}>
             <Paper elevation={2} className={classes.box3} ref={ref}>
-              <h1>Box3</h1>
+              <Repos />
             </Paper>
           </Grid>
 
@@ -89,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#183d5d',
-
+    overflow: 'hidden'
   },
   box2: {
     height: '100%',
@@ -101,9 +100,6 @@ const useStyles = makeStyles((theme) => ({
   },
   box3: {
     height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#183d5d',
   },
 }));

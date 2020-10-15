@@ -22,7 +22,7 @@ function P5({width, height}) {
   const draw = (p5) => {
     function epicycles(x, y, rotation, fourier) {
       console.log(fourier.length)
-      for (let i = 0; i < fourier.length-600; i++) {
+      for (let i = 0; i < fourier.length-500; i++) {
         let prevx = x;
         let prevy = y;
         let freq = fourier[i].freq;
