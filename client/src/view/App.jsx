@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { Grid, AppBar, Paper, Toolbar, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import P5 from '../components/P5'
 import Repos from '../components/Repos'
 import Bottom from '../components/Bottom'
+import Slack from '../components/Slack'
 
 function App() {
   const classes = useStyles();
@@ -21,12 +22,16 @@ function App() {
     return [rect, ref];
   }
 
+
   return (
     <>
       <AppBar className={classes.appbar}>
-        <Toolbar>
+        <Container>
+        <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
           <Typography variant='h3' className={classes.typography}>DSC NIT Rourkela</Typography>
+          <Slack />
         </Toolbar>
+        </Container>
       </AppBar>
 
       <div className={classes.toolbar}></div>
@@ -70,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     height: 80,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: '#93c2db',
   },
   typography: {

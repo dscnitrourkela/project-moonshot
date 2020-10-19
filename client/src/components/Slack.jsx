@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import firebase from '../config/firebase'
 import Modal from './Modal'
 
-function Slack() {
+function Slack({style}) {
   const classes = useStyles()
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,14 +31,15 @@ function Slack() {
 
   return (
     <>
-      <div>
-        <h1>{counter}</h1>
-      </div>
       <Modal 
         open={modalOpen}
         newMember={newMember}
         handleClose={() => setModalOpen(false)}
       />
+      <div style={style} >
+        <h1 style={{margin: 0, textAlign: 'right'}}> <i className="fab fa-slack"/> {counter}</h1>
+      </div>
+      
     </>
   )
 }
