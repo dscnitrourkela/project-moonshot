@@ -26,14 +26,14 @@ function App() {
 
   return (
     <Background>
-      <AppBar className={classes.appbar}>
+      {/* <AppBar className={classes.appbar}>
         <Container>
         <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
           <Typography variant='h3' className={classes.typography}>DSC NIT Rourkela</Typography>
           <Slack />
         </Toolbar>
         </Container>
-      </AppBar>
+      </AppBar> */}
 
       <div className={classes.toolbar}></div>
 
@@ -64,19 +64,14 @@ function App() {
   );
 }
 
+// 124d91436661b63f12bf600970ee65d042e27d23
+
 export default App;
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: 10,
     height: window.innerHeight - 80,
-  },
-  appbar: {
-    height: 80,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#93c2db',
   },
   typography: {
     fontFamily: "'Inter', sans-serif",

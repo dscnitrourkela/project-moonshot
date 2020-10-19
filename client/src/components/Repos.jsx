@@ -30,23 +30,22 @@ function Repos() {
 
   useEffect(() => {
     if (repos.length > 0) {
-      const callApi = () => {
-        repos.forEach(async repo => {
-          const {owner, name} = repo
-          const {data} = await axios.get(`${URL}/${owner}/${name}/issues`)
+      // const callApi = () => {
+      //   repos.forEach(async repo => {
+      //     const {owner, name} = repo
+      //     const {data} = await axios.get(`${URL}/${owner}/${name}/issues`)
 
-          const repoList = repos.map(repoTemp => repoTemp.name === name ? {issues: data, ...repoTemp} : repoTemp)
-          setRepos(repoList)
-        })
-      }
+      //     const repoList = repos.map(repoTemp => repoTemp.name === name ? {issues: data, ...repoTemp} : repoTemp)
+      //     setRepos(repoList)
+      //   })
+      // }
 
       // setInterval(callApi, 10 * 1000)
     }
-  }, [repos])
+  }, [])
 
-  console.log(repos)
-  const renderRepos = repos.map((repo) => (
-    <div className={classes.container} key={repo.id}>
+  const renderRepos = repos.map((repo, index) => (
+    <div className={classes.container} key={`repo-${index}`}>
       <div className={classes.heading}>
         <h4 className={classes.organization}>{repo.owner}</h4>
         <h3 className={classes.repoName}>{repo.name}</h3>
@@ -134,19 +133,22 @@ const useStyles = makeStyles(() => ({
     marginBottom: 10,
     fontFamily: "'Inter', sans-serif",
     fontSize: '1.8em',
-    color: '#9c4668'
+    color: '#9c4668',
+    fontWeight: '400' 
     // lineHeight: 1
+
   },
   description: {
     fontFamily: "'Inter', sans-serif",
     fontWeight: '400',
     fontSize: '0.7em',
-    textAlign: 'right',
+    textAlign: 'left',
     marginTop: '0.8em',
   },
   tags: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginLeft: 0
   },
   tag: {
     display: 'block',
@@ -158,7 +160,7 @@ const useStyles = makeStyles(() => ({
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#9c4668',
-    borderRadius: 20,
+    borderRadius: 4,
     fontWeight: '400',
     fontSize: '0.7em',
     fontFamily: "'Inter', sans-serif",
