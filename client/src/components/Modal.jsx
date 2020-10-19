@@ -6,26 +6,33 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#183d5d',
+    color: '#93c2db',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     transform: `translate(-50%, -50%)`,
     top: '50%',
     left: '50%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
 }));
 
 export default function SimpleModal({ open, handleClose, newMember }) {
   const classes = useStyles();
-  console.log(newMember);
 
   const body = (
     <div className={classes.paper}>
-      <h2 id='simple-modal-title'>{newMember.name}</h2>
-      <p id='simple-modal-description'>
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <div>
+        <h2 id='simple-modal-title'>New member joined!</h2>
+        <h1 id='simple-modal-description'>
+          {newMember.name}
+        </h1>
+      </div>
+
+      <i className="fab fa-5x fa-slack"/> 
     </div>
   );
 
