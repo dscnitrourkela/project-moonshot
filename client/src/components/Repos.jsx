@@ -8,6 +8,9 @@ import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
 
+import axios from 'axios'
+const URL = 'https://api.github.com/repos/'
+
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 function Repos() {
@@ -25,7 +28,23 @@ function Repos() {
     })
   }, [])
 
+  useEffect(() => {
+    if (repos.length > 0) {
+      const callApi = () => {
+        repos.forEach(async repo => {
+          const {owner, name} = repo
+          const {data} = await axios.get(`${URL}/${owner}/${name}/issues`)
 
+          const repoList = repos.map(repoTemp => repoTemp.name === name ? {issues: data, ...repoTemp} : repoTemp)
+          setRepos(repoList)
+        })
+      }
+
+      // setInterval(callApi, 10 * 1000)
+    }
+  }, [repos])
+
+  console.log(repos)
   const renderRepos = repos.map((repo) => (
     <div className={classes.container} key={repo.id}>
       <div className={classes.heading}>
