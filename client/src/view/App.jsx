@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import { Grid, AppBar, Paper, Toolbar, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Background from '../components/Background'
 import P5 from '../components/P5'
 import Repos from '../components/Repos'
 import Bottom from '../components/Bottom'
@@ -24,7 +25,7 @@ function App() {
 
 
   return (
-    <>
+    <Background>
       <AppBar className={classes.appbar}>
         <Container>
         <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
@@ -59,7 +60,7 @@ function App() {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Background>
   );
 }
 
@@ -69,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: 10,
     height: window.innerHeight - 80,
-    backgroundColor: '#072540',
   },
   appbar: {
     height: 80,
