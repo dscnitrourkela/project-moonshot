@@ -1,41 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { Grid, AppBar, Paper, Toolbar, Typography } from '@material-ui/core';
+import { Grid, AppBar, Paper, Toolbar, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Modal from '../components/Modal';
-import firebase from '../config/firebase';
+import Background from '../components/Background'
 import P5 from '../components/P5'
+import Repos from '../components/Repos'
+import Bottom from '../components/Bottom'
+import Slack from '../components/Slack'
 
 function App() {
   const classes = useStyles();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [slackCounter, setSlackCounter] = useState(0);
-  const [newMember, setNewMember] = useState({
-    name: '',
-  });
   const [rect, ref] = useClientRect();
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
-
-  useEffect(() => {
-    // firebase
-    //   .firestore()
-    //   .collection('slack')
-    //   .doc('info')
-    //   .onSnapshot((snapshot) => {
-    //     setSlackCounter(snapshot.data().count);
-    //     setNewMember({
-    //       name: snapshot.data().newMember.name,
-    //     });
-    //     setModalOpen(true);
-    //     setTimeout(function () {
-    //       setModalOpen(false);
-    //     }, 3000);
-    //   });
-  }, []);
 
   function useClientRect() {
     const [rect, setRect] = React.useState(null);
@@ -47,57 +23,44 @@ function App() {
     return [rect, ref];
   }
 
+
   return (
-    <>
-      <AppBar className={classes.appbar}>
-        <Toolbar>
-          <Typography variant='h3'>DSC NIT Rourkela</Typography>
+    <Background>
+      {/* <AppBar className={classes.appbar}>
+        <Container>
+        <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+          <Typography variant='h3' className={classes.typography}>DSC NIT Rourkela</Typography>
+          <Slack />
         </Toolbar>
-      </AppBar>
+        </Container>
+      </AppBar> */}
 
       <div className={classes.toolbar}></div>
+      {/* <h2 style={{textAlign:'center'}}>Check the Description</h2> */}
+      <Container style={{marginTop:'20px'}}>
+        <Grid container spacing={3} className={classes.container}>
+          <Grid item sm={12} md={8} lg={8} style={{height: '75%'}}>
+            <Paper elevation={2} className={classes.box2}>
+              {rect && (
+                <P5 width={Math.round(rect.width) * 2} height={Math.round(rect.height)} />
+              )}
+            </Paper>
+          </Grid>
 
-      <Grid container spacing={3} className={classes.container}>
-        <Grid item lg={8}>
-          <Paper elevation={2} className={classes.box2}>
-            {rect && (
-              <P5 width={Math.round(rect.width) * 2} height={Math.round(rect.height)} />
-            )}
-          </Paper>
+          <Grid item sm={12} md={4} lg={4} style={{height: '75%', marginBottom: 0}}>
+            <Paper elevation={2} className={classes.box3} ref={ref}>
+              <Repos />
+            </Paper>
+          </Grid>
+
+          <Grid item sm={12} md={12} lg={12} style={{height: '25%', marginBottom: 0}}>
+            <Paper elevation={2} className={classes.box1}>
+              <Bottom />
+            </Paper>
+          </Grid>
         </Grid>
-
-        <Grid item lg={4}>
-          <Paper elevation={2} className={classes.box3} ref={ref}>
-            <h1>Box3</h1>
-          </Paper>
-        </Grid>
-
-        <Grid item lg={12}>
-          <Paper elevation={2} className={classes.box1}>
-            <h1>{slackCounter}</h1>
-            <button
-              onClick={() => {
-                setModalOpen(true);
-                setTimeout(function () {
-                  setModalOpen(false);
-                }, 5000);
-              }}
-              style={{ marginLeft: 20 }}
-            >
-              open
-            </button>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      {/* {newMember.name !== '' && (
-        <Modal
-          open={modalOpen}
-          handleClose={handleClose}
-          newMember={newMember}
-        />
-      )} */}
-    </>
+      </Container>
+    </Background>
   );
 }
 
@@ -105,28 +68,36 @@ export default App;
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: '#F5F5F5',
+    padding: 10,
+    height: window.innerHeight - 80,
   },
-  toolbar: theme.mixins.toolbar,
+  typography: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2em',
+    color: '#072540'
+  },
+  toolbar: {
+    ...theme.mixins.toolbar, 
+    height: 80
+  },
   box1: {
-    height: '17vh',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#183d5d',
+    overflow: 'hidden'
   },
   box2: {
-    height: '68vh',
-    width: '100%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#072540',
+    backgroundColor: '#183d5d',
     overflow: 'hidden'
   },
   box3: {
-    height: '68vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: '100%',
+    backgroundColor: '#183d5d',
   },
 }));

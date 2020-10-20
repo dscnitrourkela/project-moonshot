@@ -1,14 +1,27 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Sketch from 'react-p5'
 import drawing from '../helpers/coordinates'
 import Complex, {dft} from '../helpers/complex'
+import firebase from '../config/firebase'
+
 
 function P5({width, height}) {
   let x = [];
-  let fourierX;
+  let fourierX = [];
   let time = 0;
   let path = []; 
   let skip = 6;
+  let skipper=10;
+
+
+  const APIcall = async() =>{
+    firebase.firestore().collection('p5js').get().then(query => {
+      query.forEach(doc => {
+        skipper=doc.data().count
+      })
+  })
+}
+
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(width, height).parent(canvasParentRef)
     for (let i = 0; i < drawing.length; i += skip) {
@@ -17,11 +30,13 @@ function P5({width, height}) {
     }
     fourierX = dft(x);
     fourierX.sort((a, b) => b.amp - a.amp);
+    setInterval(()=>{
+     APIcall()
+    },60000)
   };
   const draw = (p5) => {
     function epicycles(x, y, rotation, fourier) {
-      console.log(fourier.length)
-      for (let i = 0; i < fourier.length-600; i++) {
+      for (let i = 0; i < p5.min(fourier.length,skipper); i++) {
         let prevx = x;
         let prevy = y;
         let freq = fourier[i].freq;
@@ -37,7 +52,7 @@ function P5({width, height}) {
       }
       return p5.createVector(x, y);
     }
-      p5.background(7,37,64);
+      p5.background(24,61,93);
       let v = epicycles(p5.width/2, p5.height/2 , 0, fourierX);
       path.unshift(v);
 
