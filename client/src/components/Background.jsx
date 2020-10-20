@@ -34,6 +34,7 @@ function Background({children}) {
         <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
           {/* <Typography variant='h4' className={classes.typography}>DSC NIT Rourkela</Typography> */}
           <img style={{width: 450, height: 100, marginTop: 8}} src={'/logo.png'} alt="DSC NIT Rourkela"/>
+          Check the description to interact with the stream and have fun!
           <Slack />
         </Toolbar>
         </Container>

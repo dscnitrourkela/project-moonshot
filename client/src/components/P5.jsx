@@ -32,11 +32,10 @@ function P5({width, height}) {
     fourierX.sort((a, b) => b.amp - a.amp);
     setInterval(()=>{
      APIcall()
-    },6000)
+    },60000)
   };
   const draw = (p5) => {
     function epicycles(x, y, rotation, fourier) {
-      console.log(fourier.length)
       for (let i = 0; i < p5.min(fourier.length,skipper); i++) {
         let prevx = x;
         let prevy = y;

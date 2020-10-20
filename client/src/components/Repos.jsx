@@ -38,16 +38,15 @@ function Repos() {
       const {data} = await axios.get(`${URL}${owner}/${name}/issues`)
       return {issues: data, ...repo}
     })).then((values)=>{
-      console.log(values);
       setRepos(values);
-      setTimeout(callApi, 10 * 1000000);    
+      setTimeout(callApi, 300000);    
     })    
   }
 
   useEffect(() => {
     dotenv.config();         
     if(repos.length>0)
-      setTimeout(callApi, 10 * 1000); 
+      setTimeout(callApi, 300000); 
   },[repos])
 
   const renderRepos = repos.map((repo, index) => (

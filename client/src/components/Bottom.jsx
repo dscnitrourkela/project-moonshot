@@ -22,17 +22,19 @@ function Bottom() {
   })
 
   const renderContributor = (contributor) => (
-    <div style={{
+    <React.Fragment>
+      <div style={{
       display: 'flex', alignItems: 'center', width: 'auto', minWidth: 800, height: window.innerHeight * 0.25 -20, justifyContent: 'space-around' 
     }}>
       <img style={{
+        borderRadius: '50%' ,
         width: window.innerHeight * 0.25 - 50, 
         height: window.innerHeight * 0.25 - 50
       }} src={contributor.photoURL} />
       <div style={{width: '70%', height: '80%'}}>
         <h1 style={{color: '#93c2db', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '2em', textAlign: 'center', paddingBottom: 5, borderBottom: '1px solid #F0F0F0', fontWeight: '400'}}>{contributor.name}</h1>
         <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '90%', marginTop: 10}}>
-        {contributor.repos.map(repo => (
+        {contributor.repos.slice(0,3).map(repo => (
           <div>
             <h3 style={{fontWeight: '400', color: '#9c4668', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '1.2em'}}>{repo.split('/')[0]}</h3>
             <h4 style={{fontWeight: '400', color: '#93c2db', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '1em'}}>{repo.split('/')[1]}</h4>
@@ -41,6 +43,8 @@ function Bottom() {
         </div>
       </div>
     </div>
+    </React.Fragment>
+    
   )
 
   return (
