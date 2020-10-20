@@ -7,6 +7,7 @@ import firebase from '../config/firebase'
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
+import dotenv from 'dotenv';
 
 import axios from 'axios'
 const URL = 'https://api.github.com/repos/'
@@ -28,21 +29,26 @@ function Repos() {
     })
   }, [])
 
+
+  const callApi = async () => {
+    let repoList;
+    Promise.all(repos.map(async (repo)=>{
+      const {owner, name} = repo
+      const headersConfig= { headers: { Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}` } }      
+      const {data} = await axios.get(`${URL}${owner}/${name}/issues`)
+      return {issues: data, ...repo}
+    })).then((values)=>{
+      console.log(values);
+      setRepos(values);
+      setTimeout(callApi, 10 * 1000000);    
+    })    
+  }
+
   useEffect(() => {
-    if (repos.length > 0) {
-      // const callApi = () => {
-      //   repos.forEach(async repo => {
-      //     const {owner, name} = repo
-      //     const {data} = await axios.get(`${URL}/${owner}/${name}/issues`)
-
-      //     const repoList = repos.map(repoTemp => repoTemp.name === name ? {issues: data, ...repoTemp} : repoTemp)
-      //     setRepos(repoList)
-      //   })
-      // }
-
-      // setInterval(callApi, 10 * 1000)
-    }
-  }, [])
+    dotenv.config();         
+    if(repos.length>0)
+      setTimeout(callApi, 10 * 1000); 
+  },[repos])
 
   const renderRepos = repos.map((repo, index) => (
     <div className={classes.container} key={`repo-${index}`}>
@@ -61,7 +67,9 @@ function Repos() {
       </div>
 
       <div className={classes.issues}>
-
+      {repo.issues?repo.issues.map((issue, index) => (
+          <div key={`${index}-tag`}> <h4 className={classes.issuetag}>{"#"+issue.number} </h4> <h4 style={{display:'inline'}} className={classes.issuedescription}>{issue.title}</h4> </div>
+        )):""}
       </div>
     </div>
   ))
@@ -140,6 +148,14 @@ const useStyles = makeStyles(() => ({
   },
   description: {
     fontFamily: "'Inter', sans-serif",
+    fontWeight: '500',
+    fontSize: '0.8em',
+    textAlign: 'left',
+    marginTop: '0.8em',
+    color:'#fff'
+  },
+  issuedescription: {
+    fontFamily: "'Inter', sans-serif",
     fontWeight: '400',
     fontSize: '0.7em',
     textAlign: 'left',
@@ -160,6 +176,21 @@ const useStyles = makeStyles(() => ({
     paddingLeft: 10,
     color: '#fff',
     backgroundColor: '#9c4668',
+    borderRadius: 4,
+    fontWeight: '600',
+    fontSize: '0.7em',
+    fontFamily: "'Inter', sans-serif",
+  },
+  issuetag: {
+    display: 'inline',
+    width: 'auto',
+    margin: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 10,
+    paddingLeft: 10,
+    color: '#fff',
+    backgroundColor: '#152347',
     borderRadius: 4,
     fontWeight: '400',
     fontSize: '0.7em',

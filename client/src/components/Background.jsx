@@ -21,7 +21,7 @@ function Background({children}) {
         setColor(color)
         color.split('').splice(0, 1)
         const colorNoHash = color.toString()
-        const color2 = [convert.hex.hsl(colorNoHash)[0], convert.hex.hsl(colorNoHash)[1] / 1.2, convert.hex.hsl(colorNoHash)[2] * 1.1]
+        const color2 = [convert.hex.hsl(colorNoHash)[0], convert.hex.hsl(colorNoHash)[1] / 1.3, convert.hex.hsl(colorNoHash)[2] * 1.2]
         setSecondaryColor(`#${convert.hsl.hex(color2[0], color2[1], color2[2])}`)
         
       })
