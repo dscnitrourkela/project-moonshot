@@ -83,7 +83,7 @@ function Repos() {
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false} // should stop playing on user interaction
-        interval={2000}
+        interval={10000}
         organicArrows={false}
         style={{ height: '85%', borderRadius: 10 }}
         bullets={false}

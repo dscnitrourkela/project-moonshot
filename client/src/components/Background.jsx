@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {AppBar, Container, Toolbar, Typography} from '@material-ui/core'
 import convert from 'color-convert'
+import invert from 'invert-color';
 
 import Slack from './Slack'
 import firebase from '../config/firebase'
@@ -33,9 +34,9 @@ function Background({children}) {
         <Container>
         <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
           {/* <Typography variant='h4' className={classes.typography}>DSC NIT Rourkela</Typography> */}
-          <img style={{width: 450, height: 100, marginTop: 8}} src={'/logo.png'} alt="DSC NIT Rourkela"/>
-          Check the description to interact with the stream and have fun!
-          <Slack />
+          <img style={{width: 450, height: 100, marginTop: 8, }} src={'/logo.png'} alt="DSC NIT Rourkela"/>
+          <h4 style={{color: invert(secondaryColor)}}>Check the description to interact with the stream and have fun!</h4>
+          <Slack color={invert(secondaryColor)} />
         </Toolbar>
         </Container>
       </AppBar>
