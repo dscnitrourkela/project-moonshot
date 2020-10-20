@@ -37,7 +37,7 @@ function Slack({style}) {
         handleClose={() => setModalOpen(false)}
       />
       <div style={style} >
-        <h1 style={{margin: 0, textAlign: 'right', color: '#072540'}}> <i className="fab fa-slack"/> {counter}</h1>
+        <h1 style={{margin: 0, textAlign: 'right', color: '#f0f0f0'}}> <i className="fab fa-slack"/> {counter}</h1>
       </div>
       
     </>

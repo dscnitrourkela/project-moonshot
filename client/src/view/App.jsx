@@ -64,8 +64,6 @@ function App() {
   );
 }
 
-// 124d91436661b63f12bf600970ee65d042e27d23
-
 export default App;
 
 const useStyles = makeStyles((theme) => ({
