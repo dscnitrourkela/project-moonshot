@@ -17,15 +17,16 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 function Repos() {
   const classes = useStyles()
   const [repos, setRepos] = useState([])
+  const [isLoading, setLoading] = useState(true)
 
-  useEffect(() => {
+  useEffect(() => {    
     let tempRepo = []
     firebase.firestore().collection('repos').get().then(query => {
       query.forEach(repo => {
         tempRepo.push({ id: repo.id, ...repo.data() })
       })
-
-      setRepos(tempRepo)
+      setRepos(tempRepo);
+      setLoading(false);
     })
   }, [])
 
@@ -80,8 +81,10 @@ function Repos() {
         <GitHubIcon style={{ marginRight: '1em', color: '#93c2db', fontSize: 30 }} />
       </div>
       {/* <div> */}
-      <AutoplaySlider
+      {isLoading?"":(<AutoplaySlider
         play={true}
+        startup={true}
+        infinite={true}
         cancelOnInteraction={false} // should stop playing on user interaction
         interval={10000}
         organicArrows={false}
@@ -89,7 +92,7 @@ function Repos() {
         bullets={false}
       >
         {renderRepos}
-      </AutoplaySlider>
+      </AutoplaySlider>)}
       {/* </div> */}
     </>
   )

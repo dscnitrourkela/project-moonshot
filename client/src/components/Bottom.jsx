@@ -10,6 +10,7 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 function Bottom() {
   const [contributors, setContributors] = useState([])
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     firebase.firestore().collection('contributors').onSnapshot(query => {
@@ -18,6 +19,7 @@ function Bottom() {
         members.push({name: contributor.id, photoURL: contributor.data().avatar_url, repos: contributor.data().contribution})
       })
       setContributors(members)
+      setLoading(false);
     })
   })
 
@@ -28,8 +30,8 @@ function Bottom() {
     }}>
       <img style={{
         borderRadius: '50%' ,
-        width: window.innerHeight * 0.25 - 50, 
-        height: window.innerHeight * 0.25 - 50
+        width: '15%', 
+        height: '70%'
       }} src={contributor.photoURL} />
       <div style={{width: '70%', height: '80%'}}>
         <h1 style={{color: '#93c2db', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '2em', textAlign: 'center', paddingBottom: 5, borderBottom: '1px solid #F0F0F0', fontWeight: '400'}}>{contributor.name}</h1>
@@ -47,22 +49,20 @@ function Bottom() {
     
   )
 
-  return (
-    <AutoplaySlider
-      play={true}
-      cancelOnInteraction={false} // should stop playing on user interaction
-      interval={2000}
-      organicArrows={false}
-      style={{height: '100%', borderRadius: 10}}
-      bullets={false}
-    >
-      {contributors.length > 0 ? contributors.map(contributor => (
-        <div style={{width: '100%', backgroundColor: '#183d5d',}}>
-          {renderContributor(contributor)}
-        </div>
-      )) : null} 
-    </AutoplaySlider>
-  )
+  return isLoading?"":(<AutoplaySlider
+    play={true}
+    cancelOnInteraction={false} // should stop playing on user interaction
+    interval={2000}
+    organicArrows={false}
+    style={{height: '100%', borderRadius: 10}}
+    bullets={false}
+  >
+    {contributors.length > 0 ? contributors.map((contributor,key) => (
+      <div style={{width: '100%', backgroundColor: '#183d5d',}}>
+        {renderContributor(contributor)}
+      </div>
+    )) : null} 
+  </AutoplaySlider>)
 }
 
 export default Bottom
