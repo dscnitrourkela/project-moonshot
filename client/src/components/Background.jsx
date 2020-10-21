@@ -33,8 +33,7 @@ function Background({children}) {
       <AppBar className={classes.appbar} style={{backgroundColor: secondaryColor}}>
         <Container>
         <Toolbar style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
-          {/* <Typography variant='h4' className={classes.typography}>DSC NIT Rourkela</Typography> */}
-          <img style={{width: 450, height: 100, marginTop: 8, }} src={'/logo.png'} alt="DSC NIT Rourkela"/>
+          <img style={{width: 450, height: 100, marginTop: 8, color: 'red' }} src={'/logo.svg'} alt="DSC NIT Rourkela"/>
           <h4 style={{color: invert(secondaryColor)}}>Check the description to interact with the stream and have fun!</h4>
           <Slack color={invert(secondaryColor)} />
         </Toolbar>
@@ -54,4 +53,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  svg: {
+    fill: 'red'
+  }
 }))
