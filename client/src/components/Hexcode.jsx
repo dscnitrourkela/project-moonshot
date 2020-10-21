@@ -8,7 +8,7 @@ function Hexcode() {
 
   useEffect(() => {
     firebase.firestore().collection('colors').doc('colors').onSnapshot(color => setHexcode(color.data().color1))
-    setInterval(()=>{window.location=false},30*60*1000);
+    setInterval(()=>{window.location="/"},30*60*1000);
   }, [])
 
   function showVertical(hexcode) {
@@ -17,7 +17,7 @@ function Hexcode() {
       <div style={{width: 40, backgroundColor: '#183d5d', height: 'auto',
         position: 'absolute',
         top: '15%',
-        right: '4%',
+        right: '10%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

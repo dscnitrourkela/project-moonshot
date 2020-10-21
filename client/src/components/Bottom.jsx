@@ -26,7 +26,7 @@ function Bottom() {
   const renderContributor = (contributor) => (
     <React.Fragment>
       <div style={{
-      display: 'flex', alignItems: 'center', width: 'auto', minWidth: 800, height: window.innerHeight * 0.25 -20, justifyContent: 'space-around' 
+      display: 'flex', alignItems: 'center', width: 'auto', minWidth: 800, height: window.innerHeight * 0.25 -20, justifyContent: 'space-around' ,margin:'20px 20px'
     }}>
       <img style={{
         borderRadius: '50%' ,
