@@ -26,12 +26,12 @@ function Bottom() {
   const renderContributor = (contributor) => (
     <React.Fragment>
       <div style={{
-      display: 'flex', alignItems: 'center', width: 'auto', minWidth: 800, height: window.innerHeight * 0.25 -20, justifyContent: 'space-around' ,margin:'20px 20px'
+      display: 'flex', alignItems: 'center', width: 'auto', minWidth: 800, height: window.innerHeight * 0.25, justifyContent: 'space-around' ,margin:'20px 20px'
     }}>
       <img style={{
         borderRadius: '50%' ,
         width: '15%', 
-        height: '70%'
+        height: '100px'
       }} src={contributor.photoURL} />
       <div style={{width: '70%', height: '80%'}}>
         <h1 style={{color: '#93c2db', margin: 0, padding: 0, fontFamily: "'Inter', sans-serif", fontSize: '2em', textAlign: 'center', paddingBottom: 5, borderBottom: '1px solid #F0F0F0', fontWeight: '400'}}>{contributor.name}</h1>
@@ -58,7 +58,7 @@ function Bottom() {
     bullets={false}
   >
     {contributors.length > 0 ? contributors.map((contributor,key) => (
-      <div style={{width: '100%', backgroundColor: '#183d5d',}}>
+      <div style={{width: '100%', height: '300px', backgroundColor: '#183d5d',}}>
         {renderContributor(contributor)}
       </div>
     )) : null} 

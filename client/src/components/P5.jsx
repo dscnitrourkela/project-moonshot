@@ -44,7 +44,7 @@ function P5({width, height}) {
         let phase = fourier[i].phase;
         x += radius * p5.cos(freq * time + phase + rotation);
         y += radius * p5.sin(freq * time + phase + rotation);
-        p5.stroke(255, 50);
+        p5.stroke(255, 100);
         p5.noFill();
         p5.ellipse(prevx, prevy, radius * 2);
         p5.stroke(255,50);
@@ -59,9 +59,9 @@ function P5({width, height}) {
       p5.beginShape();
       for (let i = 0; i < path.length; i++) {
         p5.vertex(path[i].x, path[i].y);
-        p5.stroke(255,138,226)
+        p5.stroke(255,138,240)
         p5.strokeWeight(2)
-        p5.fill(156,70,104,200)
+        p5.fill(156,70,104,100)
         //if(i%10===0){
         //  p5.endShape()
         //  p5.beginShape()
