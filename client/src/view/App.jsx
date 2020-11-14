@@ -37,27 +37,27 @@ function App() {
       <div className={classes.toolbar}></div>
       <Container style={{marginTop:'20px'}}>
         <Grid container spacing={3} className={classes.container}>
-          <Grid item sm={12} md={8} lg={8} style={{height: '500px'}}>
-            <Paper elevation={2} className={classes.box2}>
+          <Grid item sm={12} md={8} lg={8} style={{height: '700px' ,marginBottom: 0}}>
+            <Paper elevation={0} className={classes.box3} ref={ref}>
               {rect && (
                 <P5 width={Math.round(rect.width) * 2} height={Math.round(rect.height)} />
               )}
             </Paper>
           </Grid>
 
-          <Grid item sm={12} md={4} lg={4} style={{height: '500px', marginBottom: 0}}>
+          {/* <Grid item sm={12} md={4} lg={4} style={{height: '500px', marginBottom: 0}}>
             <Paper elevation={2} className={classes.box3} ref={ref}>
               <Repos />
             </Paper>
-          </Grid>
-
+          </Grid> */}
+{/* 
           <Grid item sm={12} md={12} lg={12} style={{top: '0px', height: '200px', marginBottom: 0}}>
             <Paper elevation={2} className={classes.box1}>
               <Bottom />
             </Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
-        <Hexcode />
+        {/* <Hexcode /> */}
       </Container>
       {/* <SVG fill='red' /> */}
     </Background>
